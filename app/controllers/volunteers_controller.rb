@@ -18,7 +18,7 @@ class VolunteersController < ApplicationController
     unless Volunteer.valid_params?(params)
       redirect "/volunteers/new?error=invalid volunteer"
     end
-    Volunteer.create(params)
+    Volunteer.create(params).user_id = current_user.id
     redirect "/volunteers"
   end
 

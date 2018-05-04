@@ -1,0 +1,23 @@
+<h1>Add a New Task</h1>
+
+<form action="/tasks" method="POST">
+  <label> Task Name </label>
+  <input type="text" name="name"> </br>
+
+  <label> Task Description </label>
+  <input type="text" name="description"> </br>
+
+  <%current_user.volunteers.each do |volunteer|%>
+  <p><%=volunteer.id%></p>
+  <%end%>
+
+  <label> Which volunteer will take on this task? </label>
+  <select name="volunteer_id">
+    <% current_user.volunteers.each do |volunteer| %>
+      <option value=<%=volunteer.id %>><%= volunteer.name %></option>
+    <% end %>
+  </select>
+  </br>
+
+  <input type="submit" value="Create Task">
+</form>
