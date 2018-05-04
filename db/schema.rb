@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 3) do
 
-  create_table "Activities", force: :cascade do |t|
+  create_table "Tasks", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.integer "volunteer_id"

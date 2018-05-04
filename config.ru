@@ -6,7 +6,7 @@ require './config/environment'
 
 use Rack::MethodOverride
 
-#use ActivitiesController
+use TasksController
 use UsersController
 use VolunteersController
 run ApplicationController

@@ -1,4 +1,4 @@
-class Activity < ActiveRecord::Base
+class Task < ActiveRecord::Base
   belongs_to :volunteer
 
   def self.valid_params?(params)

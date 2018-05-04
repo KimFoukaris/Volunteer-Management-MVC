@@ -1,6 +1,6 @@
-class CreateActivities < ActiveRecord::Migration[5.2]
+class CreateTasks < ActiveRecord::Migration[5.2]
   def change
-    create_table :Activities do |t|
+    create_table :Tasks do |t|
       t.string :name
       t.string :description
       t.integer :volunteer_id
