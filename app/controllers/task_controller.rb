@@ -28,14 +28,20 @@ class TasksController < ApplicationController
       erb :'tasks/edit'
     end
 
-    post "/tasks/:id" do
-      redirect_if_not_logged_in
-      @task = Task.find(params[:id])
-      unless Task.valid_params?(params)
-        redirect "/tasks/#{@task.id}/edit?error=invalid task"
-      end
-      @task.update(params.select{|k|k=="name" || k=="description" || k=="volunteer_id"})
-      redirect "/tasks/#{@task.id}"
+  post "/tasks/:id" do
+    redirect_if_not_logged_in
+    @task = Task.find(params[:id])
+    unless Task.valid_params?(params)
+      redirect "/tasks/#{@task.id}/edit?error=invalid task"
+    end
+    @task.update(params.select{|k|k=="name" || k=="description" || k=="volunteer_id"})
+    redirect "/tasks/#{@task.id}"
+  end
+
+  get "/tasks/:id" do
+    redirect_if_not_logged_in
+    @task = Task.find(params[:id])
+    erb :'tasks/show'
     end
 
 end
