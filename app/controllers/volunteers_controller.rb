@@ -39,4 +39,10 @@ class VolunteersController < ApplicationController
     redirect "/volunteers/#{@volunteer.id}"
   end
 
+  get "/volunteers/:id" do
+      redirect_if_not_logged_in
+      @volunteer = Volunteer.find(params[:id])
+      erb :'volunteers/show'
+    end
+
 end
