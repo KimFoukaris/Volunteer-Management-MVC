@@ -1,6 +1,9 @@
+<h2>Volunteers</h2>
+
 <% @volunteers.each do |volunteer| %>
   Volunteer Name:  <%= volunteer.name %></br>
   Areas of Interest:  <%= volunteer.interest %> </br>
+  Mentor:  <%= volunteer.user_id %> </br>
   <a href="/volunteers/<%=volunteer.id%>/edit">Edit</a>
   </br>
   </br>
