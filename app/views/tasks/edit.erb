@@ -1,0 +1,19 @@
+<h1>Edit <%= @task.name %></h1>
+
+<form action="/tasks/<%=@task.id %>" method="POST">
+  <label> Task Name </label>
+  <input type="text" name="name" value="<%=@task.name %>"> </br>
+
+  <label> Task Description </label>
+  <input type="text" name="description" value="<%=@task.description%>"> </br>
+
+  <label> Which volunteer will take care of this task? </label>
+  <select name="volunteer_id">
+    <% current_user.volunteers.each do |volunteer| %>
+      <option value=<%=volunteer.id %> <%= "selected" if volunteer.id==@task.volunteer.id %> ><%= volunteer.name %></option>
+    <% end %>
+  </select>
+  </br>
+
+  <input type="submit" value="Update Task">
+</form>
