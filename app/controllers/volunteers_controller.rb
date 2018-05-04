@@ -13,13 +13,30 @@ class VolunteersController < ApplicationController
     end
 
   post "/volunteers" do
-      redirect_if_not_logged_in
+    redirect_if_not_logged_in
 
-      unless Volunteer.valid_params?(params)
-        redirect "/volunteers/new?error=invalid volunteer"
-      end
-      Volunteer.create(params)
-      redirect "/volunteers"
+    unless Volunteer.valid_params?(params)
+      redirect "/volunteers/new?error=invalid volunteer"
     end
+    Volunteer.create(params)
+    redirect "/volunteers"
+  end
+
+  get "/volunteers/:id/edit" do
+      redirect_if_not_logged_in
+      @error_message = params[:error]
+      @volunteer = Volunteer.find(params[:id])
+      erb :'volunteers/edit'
+    end
+
+  post "/volunteers/:id" do
+    redirect_if_not_logged_in
+    @volunteer = Volunteer.find(params[:id])
+    unless Volunteer.valid_params?(params)
+      redirect "/volunteers/#{@volunteer.id}/edit?error=invalid volunteer"
+    end
+    @volunteer.update(params.select{|k|k=="name" || k=="interest"})
+    redirect "/volunteers/#{@volunteer.id}"
+  end
 
 end

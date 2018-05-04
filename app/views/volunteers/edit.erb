@@ -1,0 +1,11 @@
+<h1>Edit <%= @volunteer.name %></h1>
+
+<form action="/volunteers/<%=@volunteer.id %>" method="POST">
+  <label> Volunteer </label>
+  <input type="text" name="name" value="<%=@volunteer.name %>"> </br>
+
+  <label> Interests </label>
+  <input type="text" name="interest" value="<%=@volunteer.interest %>"> </br>
+
+  <input type="submit" value="Update">
+</form>
