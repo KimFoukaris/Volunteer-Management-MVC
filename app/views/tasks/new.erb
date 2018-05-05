@@ -7,10 +7,6 @@
   <label> Task Description </label>
   <input type="text" name="description"> </br>
 
-  <%current_user.volunteers.each do |volunteer|%>
-  <p><%=volunteer.id%></p>
-  <%end%>
-
   <label> Which volunteer will take on this task? </label>
   <select name="volunteer_id">
     <% current_user.volunteers.each do |volunteer| %>
