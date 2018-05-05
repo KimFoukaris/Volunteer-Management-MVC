@@ -1,5 +1,5 @@
 class Volunteer < ActiveRecord::Base
-  has_many :activities
+  has_many :tasks
   belongs_to :user
 
   def self.valid_params?(params)
