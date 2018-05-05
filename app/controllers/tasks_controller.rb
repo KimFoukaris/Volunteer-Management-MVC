@@ -13,7 +13,6 @@ class TasksController < ApplicationController
 
   get "/tasks/new" do
     redirect_if_not_logged_in
-    #@error_message = params[:error]
     erb :'tasks/new'
   end
 
@@ -29,7 +28,6 @@ class TasksController < ApplicationController
 
   get "/tasks/:id/edit" do
     redirect_if_not_logged_in
-    #@error_message = params[:error]
     @task = Task.find(params[:id])
     erb :'tasks/edit'
   end
@@ -38,6 +36,7 @@ class TasksController < ApplicationController
     redirect_if_not_logged_in
     @task = Task.find(params[:id])
     unless Task.valid_params?(params)
+      flash[:message] = "Error:  Name and Description must have content"
       redirect "/tasks/#{@task.id}/edit?error=invalid task"
     end
     @task.update(params.select{|k|k=="name" || k=="description" || k=="volunteer_id"})
@@ -57,6 +56,7 @@ class TasksController < ApplicationController
       @task.delete
       redirect to '/tasks'
     else
+      flash[:message] = "Error:  Invalid User"
       redirect "/tasks?error=invalid user"
     end
   end

@@ -13,7 +13,6 @@ class VolunteersController < ApplicationController
 
   get "/volunteers/new" do
       redirect_if_not_logged_in
-      #@error_message = params[:error]
       erb :'volunteers/new'
     end
 
@@ -29,7 +28,6 @@ class VolunteersController < ApplicationController
 
   get "/volunteers/:id/edit" do
       redirect_if_not_logged_in
-      #@error_message = params[:error]
       @volunteer = Volunteer.find(params[:id])
       if @volunteer && @volunteer.user == current_user
         erb :'volunteers/edit'
@@ -42,6 +40,7 @@ class VolunteersController < ApplicationController
     redirect_if_not_logged_in
     @volunteer = Volunteer.find(params[:id])
     unless Volunteer.valid_params?(params)
+      flash[:message] = "Error:  Name and Interest must have content"
       redirect "/volunteers/#{@volunteer.id}/edit?error=invalid volunteer"
     end
     @volunteer.update(params.select{|k|k=="name" || k=="interest"})
@@ -61,6 +60,7 @@ class VolunteersController < ApplicationController
       @volunteer.delete
       redirect to '/volunteers'
     else
+      flash[:message] = "Error:  Invalid User"
       redirect "/volunteers?error=invalid user"
     end
   end
