@@ -1,10 +1,12 @@
-<%= @volunteer.name %><br />
-  <%= @volunteer.interest %> <br />
+<h2>Volunteer</h2>
 
-  <h2>Tasks</h2>
+Name:  <%= @volunteer.name %><br />
+Interests:  <%= @volunteer.interest %> <br />
+
+  <h3>Tasks</h3>
   <ul>
   <% @volunteer.tasks.each do |task| %>
-    <li><a href="/tasks/<%=task.id%>"><%= task.name %></a></li>
+    <li><a href="/tasks/<%=task.id%>"><%= task.name %>:  <%= task.description %></a></li>
   <% end%>
   </ul>
   <a href="/volunteers/<%=@volunteer.id%>/edit">Edit</a>

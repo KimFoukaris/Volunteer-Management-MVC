@@ -1,5 +1,7 @@
-<%= @task.name %><br />
-  <%= @task.description %> <br />
+<h2> Task </h2>
+
+Name:  <%= @task.name %><br />
+Description:  <%= @task.description %> <br />
   Volunteer: <a href="/volunteers/<%=@task.volunteer.id%>"><%= @task.volunteer.name %></a> <br />
   <a href="/tasks/<%=@task.id%>/edit">Edit</a>
   <br />
