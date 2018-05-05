@@ -8,7 +8,7 @@ class VolunteersController < ApplicationController
 
   get "/volunteers/new" do
       redirect_if_not_logged_in
-      @error_message = params[:error]
+      #@error_message = params[:error]
       erb :'volunteers/new'
     end
 
@@ -23,9 +23,13 @@ class VolunteersController < ApplicationController
 
   get "/volunteers/:id/edit" do
       redirect_if_not_logged_in
-      @error_message = params[:error]
+      #@error_message = params[:error]
       @volunteer = Volunteer.find(params[:id])
-      erb :'volunteers/edit'
+      if @volunteer && @volunteer.user == current_user
+        erb :'volunteers/edit'
+      else
+        redirect "/volunteers?error=invalid user"
+      end
     end
 
   post "/volunteers/:id" do

@@ -8,7 +8,7 @@ class TasksController < ApplicationController
 
   get "/tasks/new" do
       redirect_if_not_logged_in
-      @error_message = params[:error]
+      #@error_message = params[:error]
       erb :'tasks/new'
     end
 
@@ -23,7 +23,7 @@ class TasksController < ApplicationController
 
   get "/tasks/:id/edit" do
       redirect_if_not_logged_in
-      @error_message = params[:error]
+      #@error_message = params[:error]
       @task = Task.find(params[:id])
       erb :'tasks/edit'
     end
