@@ -7,26 +7,26 @@ class TasksController < ApplicationController
   end
 
   get "/tasks/new" do
-      redirect_if_not_logged_in
-      #@error_message = params[:error]
-      erb :'tasks/new'
-    end
+    redirect_if_not_logged_in
+    #@error_message = params[:error]
+    erb :'tasks/new'
+  end
 
   post "/tasks" do
-      redirect_if_not_logged_in
-      unless Task.valid_params?(params)
-        redirect "/tasks/new?error=invalid task"
-      end
-      Task.create(params)
-      redirect "/tasks"
+    redirect_if_not_logged_in
+    unless Task.valid_params?(params)
+      redirect "/tasks/new?error=invalid task"
     end
+    Task.create(params)
+    redirect "/tasks"
+  end
 
   get "/tasks/:id/edit" do
-      redirect_if_not_logged_in
-      #@error_message = params[:error]
-      @task = Task.find(params[:id])
-      erb :'tasks/edit'
-    end
+    redirect_if_not_logged_in
+    #@error_message = params[:error]
+    @task = Task.find(params[:id])
+    erb :'tasks/edit'
+  end
 
   post "/tasks/:id" do
     redirect_if_not_logged_in
@@ -42,6 +42,17 @@ class TasksController < ApplicationController
     redirect_if_not_logged_in
     @task = Task.find(params[:id])
     erb :'tasks/show'
+  end
+
+  delete '/tasks/:id/delete' do
+    redirect_if_not_logged_in
+    @task = Task.find(params[:id])
+    if @task && @task.volunteer.user_id == current_user.id
+      @task.delete
+      redirect to '/tasks'
+    else
+      redirect "/tasks?error=invalid user"
     end
+  end
 
 end

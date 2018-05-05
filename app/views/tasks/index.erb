@@ -4,6 +4,14 @@
   Task Name:  <%= task.name %></br>
   Task Description:  <%= task.description %> </br>
   Task Volunteer:  <%= task.volunteer.name %> </br>
+  <% @user = User.find(task.volunteer.user_id) %>
+  Volunteer Mentor:  <%= @user.username %> </br>
+
+  <form method="post" action="/tasks/<%=task.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Task">
+  </form>
+
   <a href="/tasks/<%=task.id%>/edit">Edit</a>
   </br>
   </br>
