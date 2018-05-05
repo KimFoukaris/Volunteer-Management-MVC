@@ -23,6 +23,10 @@
         <a href="/login"> Sign In </a>
       <%end %>
 
+      <% if flash.has?(:message) %>
+        <%= flash[:message] %>
+      <% end %>
+
     </nav>
     <%= yield %>
   </body>

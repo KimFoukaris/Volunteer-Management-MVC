@@ -1,4 +1,9 @@
+require 'rack-flash'
+
 class VolunteersController < ApplicationController
+
+  use Rack::Flash
+  enable :sessions
 
   get "/volunteers" do
       redirect_if_not_logged_in
@@ -15,6 +20,7 @@ class VolunteersController < ApplicationController
   post "/volunteers" do
     redirect_if_not_logged_in
     unless Volunteer.valid_params?(params)
+      flash[:message] = "Error:  Name and Interest must have content"
       redirect "/volunteers/new?error=invalid volunteer"
     end
     current_user.volunteers.create(params)

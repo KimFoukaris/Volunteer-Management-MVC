@@ -1,4 +1,9 @@
+require 'rack-flash'
+
 class TasksController < ApplicationController
+
+  use Rack::Flash
+  enable :sessions
 
   get "/tasks" do
     redirect_if_not_logged_in
@@ -15,6 +20,7 @@ class TasksController < ApplicationController
   post "/tasks" do
     redirect_if_not_logged_in
     unless Task.valid_params?(params)
+      flash[:message] = "Error:  Name and Description must have content"
       redirect "/tasks/new?error=invalid task"
     end
     Task.create(params)
