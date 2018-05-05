@@ -48,4 +48,15 @@ class VolunteersController < ApplicationController
       erb :'volunteers/show'
     end
 
+  delete '/volunteers/:id/delete' do
+    redirect_if_not_logged_in
+    @volunteer = Volunteer.find(params[:id])
+    if @volunteer && @volunteer.user == current_user
+      @volunteer.delete
+      redirect to '/volunteers'
+    else
+      redirect "/volunteers?error=invalid user"
+    end
+  end
+
 end
