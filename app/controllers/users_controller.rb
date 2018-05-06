@@ -14,14 +14,13 @@ class UsersController < ApplicationController
       elsif User.exists?(username: params[:username])
         redirect to '/signup?error=invalid duplicate username'
       else
-        @user = User.create(:username => params[:username], :password => params[:password])
+        @user = User.create(params)
         session[:user_id] = @user.id
         redirect '/volunteers'
       end
     end
 
     get '/login' do
-        @error_message = params[:error]
         if !session[:user_id]
           erb :'users/login'
         else
